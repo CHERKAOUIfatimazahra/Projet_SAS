@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 // structurs pour declaration les variables
 
 typedef struct
@@ -7,40 +8,44 @@ typedef struct
     int ID;
     char titre[20];
     char description[100];
-    char deadlline[30];
+    char deadline[30];
     char statut[30];
 
 } nouv_tache;
 
-nouv_tache tache[100];
+nouv_tache Tache[100];
 
 // ajoutee nouvelle tache
 
-void AjouteUneTache()
+void AjouteUneTache(int nbr_tache)
 {
     printf("ID de la tache : ");
-    scanf("%d", &tache[].ID);
-    getchar();
-    printf("Titre de la tache : ");
-    gets(tache.titre);
-    printf("Description de la tache : ");
-    gets(tache.description);
-    printf("Deadline de la tache : ");
-    gets(tache.deadlline);
-    printf("Statut de la tache : ");
-    gets(tache.statut);
+    scanf("%d",&Tache[nbr_tache].ID);
+    printf("Titre de la tache :\n ");
+    scanf("%s",Tache[nbr_tache].titre);
+    printf("Description de la tache \n: ");
+    scanf("%s",Tache[nbr_tache].description);
+    printf("Deadline de la tache : \n");
+    scanf("%s",Tache[nbr_tache].deadline);
+    printf("Statut de la tache : \n");
+    scanf("%s",Tache[nbr_tache].statut);
+   nbr_tache++;
 }
 // affichage
 
-for (int i = 0; i < nbr_tache ; i++)
+void AfficherLesTaches(int nbr_tache)
 {
-    printf("ID: %d\n", tache.ID);
-    printf("Titre: %s\n", tache.titre);
-    printf("Description: %s\n", tache.description);
-    printf("Deadline: %s\n", tache.deadlline);
-    printf("Statut: %s\n", tache.statut);
+  for (int i = 0; i < nbr_tache ; i++)
+{
+    printf("ID: %d\n", Tache[i].ID);
+    printf("Titre: %s\n", Tache[i].titre);
+    printf("Description: %s\n", Tache[i].description);
+    printf("Deadline: %s\n", Tache[i].deadline);
+    printf("Statut: %s\n", Tache[i].statut);
     printf("\n");
 }
+}
+
 
 
 //modification
@@ -59,23 +64,23 @@ for (int i = 0; i < nbr_tache ; i++)
 
 int main()
 {
-    int choie;
-    nouv_tache;
+    int choix;
     int nbr_tache = 0;
+
     do
     {
-        printf("     menu principale : \n" );
+        printf("**************menu principale**************\n" );
         printf("1- ajoutee nouvelle tache \n" );
         printf("2- modifier une tache \n" );
         printf("3- supprimer une tache \n" );
         printf("4- recherche une tache \n" );
         printf("5- statistique \n" );
-
-
+        printf("0- Quitter\n");
+        printf("*******************************************\n" );
         printf("votre choix est : \n" );
-        scanf("%d",&choie);
+        scanf("%d",&choix);
 
-        switch (choie)
+        switch (choix)
         {
         case 1 :
         {
@@ -85,12 +90,8 @@ int main()
             scanf("%d",&N);
 
             for (i = 0 ; i < N ; i++)
-            {
-                tache.ID = nbr_tache + 1;
-                identifiant_tache(tache);// fonction d'ajout //ajoute un tache ou plusieur taches // trieage par titre ASCII
-                nbr_tache ++;
-            }
 
+                AjouteUneTache(&nbr_tache); //la fonction pour ajouter une tâche
         }
 
         break;
@@ -112,7 +113,7 @@ int main()
         }
 
     }
-    while (choie != 0);
+    while (choix != 0);
 
 
 
