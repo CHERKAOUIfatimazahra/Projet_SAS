@@ -63,7 +63,7 @@ void addTasks()
     for(int i = numTasks ; i< N ; i++)
         addTask();
 }
-// Fonction pour afficher toutes les tâches
+// Fonction pour afficher toutes les tâches********************************************************************************
 void displayAllTasks()
 {
     if (numTasks == 0)
@@ -79,6 +79,34 @@ void displayAllTasks()
     {
         printf("%d\t%s\t%s\t%s\t%s\t%s\n", tasks[i].id, tasks[i].title, tasks[i].description, tasks[i].deadline, tasks[i].status, tasks[i].creation_date);
     }
+    //**********************************************************************************************************************
+    int Choix;
+    do
+    {
+        printf("1. les tâches par ordre alphabétique.\n");
+        printf("2. les tâches par deadline.\n");
+        printf("3. Afficher les tâches dont le deadline est dans 3 jours ou moins.\n");
+        printf("0. Quitter\n");
+
+        printf("Choix: ");
+        scanf("%d", &Choix);
+
+        switch (Choix)
+        {
+        case 1:
+            order_alpha();
+
+            break;
+        case 2:
+            //order_deadline();
+            break;
+        case 3:
+            //order_deadline_jours();
+            break;
+        }
+    }
+    while (Choix != 0);
+
 }
 // Fonction pour modifier une tâche
 void modifyTask()
@@ -186,24 +214,27 @@ void deleteTaskById()
     }
 }
 // Fonction pour afficher les statistiques
-void displayStatistics(){
+void displayStatistics()
+{
 
-int completedTask=0;
-int incompletedTask=0;
+    int completedTask=0;
+    int incompletedTask=0;
 
-for (int i = 0 ; i < numTasks ; i++){
-    if (strcasecmp(tasks[i].status, "done") == 0)
+    for (int i = 0 ; i < numTasks ; i++)
     {
-       completedTask++;
-    }
-    else{
-        incompletedTask++;
-    }
+        if (strcasecmp(tasks[i].status, "done") == 0)
+        {
+            completedTask++;
+        }
+        else
+        {
+            incompletedTask++;
+        }
 
-}
-        printf("le nombre total des tâches : %d \n", numTasks);
-        printf("le nombre de tâches complètes : %d \n", completedTask);
-        printf("le nombre de tâches incomplètes : %d \n", incompletedTask);
+    }
+    printf("le nombre total des tâches : %d \n", numTasks);
+    printf("le nombre de tâches complètes : %d \n", completedTask);
+    printf("le nombre de tâches incomplètes : %d \n", incompletedTask);
 }
 
 int main()
@@ -270,14 +301,36 @@ int main()
 
 
 
+//********************************************************
+//ordre
+void order_alpha()
+{
+    struct Task tmp;
+    for(int i=0; i<numTasks; i++)
+    {
+        for(int j=i+1; j<numTasks ; j++)
+        {
+            if(strcmp(tasks[i].title,tasks[j].title)>0)
+            {
+                tmp = tasks[i];
+                tasks[i] = tasks[j];
+                tasks[j] = tmp;
+            }
+        }
+    }
+
+}
+//deadline
+void order_deadline()
+{
+
+}
+
+//deadline3jour
+void order_deadline_jours(){
 
 
-
-
-
-
-
-
+}
 
 
 
