@@ -34,8 +34,10 @@ void addTask()
         scanf("%s", newTask.description);
         printf("\n Entrez la date limite de la tâche (jj/mm/aaaa) : ");
         scanf("%s", newTask.deadline);
+
         printf("\n Entrez le statut de la tâche :");
         scanf("%s", newTask.status);
+
         printf("\n Entrez la date de création de la tâche (jj/mm/aaaa) :");
         scanf("%s", newTask.creation_date);
 
@@ -50,6 +52,16 @@ void addTask()
     {
         printf("Nombre maximum de tâches atteint.\n");
     }
+}
+// ajoutee plusieur tach
+void addTasks()
+{
+    int N;
+    printf("entree le nombre de tache a ajoutee: \n");
+    scanf("%d",&N);
+
+    for(int i = numTasks ; i< N ; i++)
+        addTask();
 }
 // Fonction pour afficher toutes les tâches
 void displayAllTasks()
@@ -94,7 +106,6 @@ void modifyTask()
             break;
         }
     }
-
     if (!found)
     {
         printf("Task with ID %d not found.\n", taskId);
@@ -119,13 +130,11 @@ void searchTaskById()
             break;
         }
     }
-
     if (!found)
     {
         printf("Tâche avec l'ID %d introuvable.\n", taskId);
     }
 }
-
 // Fonction pour rechercher une tâche par titre
 void searchTaskByTitle()
 {
@@ -144,7 +153,6 @@ void searchTaskByTitle()
             found = 1;
         }
     }
-
     if (!found)
     {
         printf("Aucune tâche avec le titre \"%s\" found.\n", searchTitle);
@@ -159,31 +167,44 @@ void deleteTaskById()
 
     for (int i = 0; i < numTasks; i++)
     {
-
         if (tasks[i].id == taskId)
         {
             found = 1;
         }
-
         if (!found)
         {
             printf("Tâche avec l'ID %d introuvable.\n", taskId);
         }
     }
-
-
-
-     if(found==1){
+    if(found==1)
+    {
         for (int i = taskId ; i < numTasks; i++)
-            {
-                tasks[i] =  tasks[i + 1];
-            }
-            numTasks = numTasks - 1;
-     }
-
+        {
+            tasks[i] =  tasks[i + 1];
+        }
+        numTasks = numTasks - 1;
+    }
 }
 // Fonction pour afficher les statistiques
+void displayStatistics(){
 
+int completedTask=0;
+int incompletedTask=0;
+
+for (int i = 0 ; i < numTasks ; i++){
+    if (strcasecmp(tasks[i].status, "done") == 0)
+    {
+       completedTask++;
+    }
+    else{
+        incompletedTask++;
+    }
+
+}
+        printf("le nombre total des tâches : %d \n", numTasks);
+        printf("le nombre de tâches complètes : %d \n", completedTask);
+        printf("le nombre de tâches incomplètes : %d \n", incompletedTask);
+}
 
 int main()
 {
@@ -199,7 +220,8 @@ int main()
         printf("4. Rechercher une tâche par ID\n");
         printf("5. Rechercher une tâche par titre\n");
         printf("6. Supprimer une tâche par ID\n");
-        printf("7. Afficher les statistiques\n");
+        printf("7. ajoutee plusieur tache\n");
+        printf("8. Afficher les statistiques\n");
         printf("0. Quitter\n");
 
         printf("***********************************************************\n");
@@ -227,7 +249,10 @@ int main()
             deleteTaskById();
             break;
         case 7:
-            //deleteTaskById();
+            addTasks();
+            break;
+        case 8:
+            displayStatistics();
             break;
         case 0:
             printf("Goodbye!\n");
