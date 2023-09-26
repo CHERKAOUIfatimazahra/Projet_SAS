@@ -12,19 +12,17 @@ struct Task
     char status[20];
     char creation_date[12]; // Format "jj/mm/aaaa"
 };
-// Maximum number of tasks**************************************************************************************************
-#define MAX_TASKS 100
-
 // Tableau pour stocker les tâches******************************************************************************************
-struct Task tasks[MAX_TASKS];
+struct Task tasks[100];
 
 // Fonction pour ajouter une nouvelle tâche*********************************************************************************
 int numTasks = 0;
 void addTask()
 {
-    if (numTasks < MAX_TASKS)
+    if (numTasks < 100)
     {
         struct Task newTask;
+
         printf("Entrez le titre de la tache :");
         scanf("%s", newTask.title);
         printf("\nEntrez la description de la tache :");
@@ -66,7 +64,6 @@ void displayAllTasks()
     if (numTasks == 0)
     {
         printf("Aucune tache a afficher.\n");
-        return;
     }
     printf("Liste de toutes les taches :\n");
     printf("ID\tTitle\tDescription\tDeadline\tStatus\tCreation Date\n");
@@ -274,7 +271,7 @@ int main()
         case 8:
             displayStatistics();
             break;
-        case 9:
+        case 0:
             printf("Au revoir!\n");
             break;
         default:
@@ -302,7 +299,8 @@ void order_alpha()
             }
         }
         // affichage par ordre
-        printf("Liste de toutes les taches :\n");
+        printf("\nListe de toutes les taches :\n");
+        printf("ID\tTitle\tDescription\tDeadline\tStatus\tCreation Date\n");
         printf("%d\t%s\t%s\t%s\t%s\t%s\n", tasks[i].id, tasks[i].title, tasks[i].description, tasks[i].deadline, tasks[i].status, tasks[i].creation_date);
     }
 }
@@ -322,15 +320,8 @@ void sortByDeadline()
             }
         }
         // affichage par ordre
-        printf("Taches triees par date limite.\n");
+        printf("\nTaches triees par date limite\n");
+        printf("ID\tTitle\tDescription\tDeadline\tStatus\tCreation Date\n");
         printf("%d\t%s\t%s\t%s\t%s\t%s\n", tasks[i].id, tasks[i].title, tasks[i].description, tasks[i].deadline, tasks[i].status, tasks[i].creation_date);
     }
 }
-// Fonction pour afficher les tâches avec des délais sous 3 jours
-
-
-
-
-
-
-
